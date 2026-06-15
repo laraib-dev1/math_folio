@@ -151,6 +151,11 @@ export default function CourseDetail() {
             htmlContent={course.description || defaultCourseHtml}
             relatedServices={relatedCourses.length > 0 ? relatedCourses : undefined}
             stickySidebar={true}
+            bookMeetingHref={landingNav.buildWhatsAppHref({
+              itemTitle: course.title || "Untitled Course",
+              itemKind: "course",
+            })}
+            bookMeetingLabel="Set Meeting"
           />
         </div>
         <DetailPageLatestAndCta

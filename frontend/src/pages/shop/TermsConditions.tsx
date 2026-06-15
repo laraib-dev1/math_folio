@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
-import Navbar from "@/components/layout/Navbar";
+import Navbar2 from "@/components/layout/Navbar2";
 import Footer from "@/components/layout/Footer";
+import { useSecondLandingNavbarProps } from "@/hooks/useSecondLandingNavbarProps";
 import { getContentByType } from "@/api/content.api";
 import { TableOfContents } from "@/components/ui/TableOfContents";
 import PageLoader from "@/components/ui/PageLoader";
@@ -14,6 +15,7 @@ type PageContent = {
 };
 
 export default function TermsConditions() {
+  const landingNav = useSecondLandingNavbarProps();
   const [content, setContent] = useState<PageContent>({
     title: "Terms & Conditions",
     subTitle: "Legal page related Sub Title",
@@ -53,7 +55,23 @@ export default function TermsConditions() {
     }
   }, [content.description]);
 
-  if (loading) return <PageLoader />;
+  if (loading) {
+    return (
+      <div className="min-h-screen flex flex-col bg-transparent pt-20 landing-detail-page">
+        <Navbar2
+          bottomDivHasColor={false}
+          otherPagesItems={landingNav.otherPagesItems}
+          companyName={landingNav.companyName}
+          hireMeHref={landingNav.hireMeHref}
+          companySocialLinks={landingNav.companySocialLinks}
+          mainNavLinks={landingNav.mainNavLinks}
+        />
+        <main className="flex-1 flex items-center justify-center">
+          <PageLoader />
+        </main>
+      </div>
+    );
+  }
 
   // Format date
   const formatDate = (dateString?: string) => {
@@ -63,7 +81,7 @@ export default function TermsConditions() {
   };
 
   return (
-    <div className="bg-white min-h-screen flex flex-col" data-toc-sticky-page>
+    <div className="min-h-screen flex flex-col bg-white pt-20 landing-detail-page" data-toc-sticky-page>
       <style>{`
         /* Force text-align from inline styles - override any other rules */
         .content-area p[style*="text-align"],
@@ -103,8 +121,15 @@ export default function TermsConditions() {
           text-align: left !important;
         }
       `}</style>
-      <Navbar />
-      <main className={`${spacing.navbar.offset} ${spacing.navbar.gapBottom} flex-1`}>
+      <Navbar2
+        bottomDivHasColor={false}
+        otherPagesItems={landingNav.otherPagesItems}
+        companyName={landingNav.companyName}
+        hireMeHref={landingNav.hireMeHref}
+        companySocialLinks={landingNav.companySocialLinks}
+        mainNavLinks={landingNav.mainNavLinks}
+      />
+      <main className="flex-1 pt-0">
         {/* Title Section - Centered content area */}
         <section className={`w-full ${spacing.section.gap}`}>
           <div className="max-w-[1232px] mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
@@ -155,7 +180,7 @@ export default function TermsConditions() {
         </section>
       </main>
       <section className={`w-full ${spacing.footer.gapTop}`} style={{ marginBottom: 0, paddingBottom: 0 }}>
-        <Footer />
+        <Footer variant="landing2" />
       </section>
     </div>
   );

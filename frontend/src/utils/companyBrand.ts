@@ -36,6 +36,32 @@ export function buildWhatsAppUrl(phone?: string, message?: string): string {
   return message ? `${baseUrl}?text=${encodeURIComponent(message)}` : baseUrl;
 }
 
+export type WhatsAppContactContext = {
+  itemTitle?: string;
+  itemKind?: "course" | "service";
+};
+
+export function buildWhatsAppGreetingMessage(
+  companyName?: string,
+  context?: WhatsAppContactContext
+): string {
+  const name = (companyName || "").trim() || DEFAULT_COMPANY_NAME;
+  const title = context?.itemTitle?.trim();
+  if (title && context?.itemKind) {
+    const kindLabel = context.itemKind === "course" ? "course" : "service";
+    return `Hello, I visited the ${name} site and I'm interested in the ${kindLabel} "${title}". I would like to set up a meeting.`;
+  }
+  return `Hello, I visited the ${name} site. I would like to ask you`;
+}
+
+export function buildWhatsAppContactUrl(
+  phone?: string,
+  companyName?: string,
+  context?: WhatsAppContactContext
+): string {
+  return buildWhatsAppUrl(phone, buildWhatsAppGreetingMessage(companyName, context));
+}
+
 export function applyCompanyBranding(company: CompanyBrandData | null | undefined): void {
   if (typeof document === "undefined") return;
 

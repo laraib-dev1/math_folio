@@ -2,9 +2,10 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import SalesChart from "../../../components/admin/dashboard/SalesChart";
 import { ExternalLink } from "lucide-react";
-import { getCatalogTypes } from "@/api/catalogtype.api";
+import { getEnabledCatalogTypes } from "@/api/catalogtype.api";
 import { getBlogStats } from "@/api/blog.api";
 import { getApplications } from "@/api/application.api";
+import { getEnabledAdminTabs } from "@/api/admintab.api";
 import PageLoader from "@/components/ui/PageLoader";
 
 interface CatalogTypeCard {
@@ -25,13 +26,19 @@ export default function DashboardPage() {
     const loadCatalogCards = async () => {
       try {
         setCatalogLoading(true);
-        const types = await getCatalogTypes();
-        if (!types?.length) {
+        const [types, enabledTabs] = await Promise.all([
+          getEnabledCatalogTypes(),
+          getEnabledAdminTabs().catch(() => [] as { path?: string }[]),
+        ]);
+        const applicationsEnabled = (enabledTabs || []).some(
+          (tab: { path?: string }) => tab.path === "/admin/applications"
+        );
+        if (!types?.length && !applicationsEnabled) {
           setCatalogCards([]);
           return;
         }
         const cards: CatalogTypeCard[] = await Promise.all(
-          types.map(async (t: { _id: string; slug: string; label: string }) => {
+          (types || []).map(async (t: { _id: string; slug: string; label: string }) => {
             const data = await getBlogStats(t.slug).catch(() => ({
               published: 0,
               totalBlogs: 0,
@@ -46,8 +53,7 @@ export default function DashboardPage() {
             };
           })
         );
-        const hasApplicationsType = cards.some((card) => card.slug === "applications");
-        if (!hasApplicationsType) {
+        if (applicationsEnabled) {
           const apps = await getApplications("all").catch(() => []);
           const list = Array.isArray(apps) ? apps : [];
           cards.push({

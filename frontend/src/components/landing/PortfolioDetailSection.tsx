@@ -37,15 +37,20 @@ const defaultButtons = [
   // { label: "Schedule Meeting", href: "#" },
 ];
 
-const defaultDescription = `I am Dr. Ali Athar, a board-certified general surgeon and medical photographer. With years of experience in the operating room, I combine precision, discipline, and artistry to capture not only the science but also the human side of surgery.
+const defaultDescription = `At MathiMastersHub, we believe that every student has the potential to excel in mathematics with the right guidance and consistent practice. Our mission is to make math learning simple, engaging, and effective through personalized online tutoring designed to meet each student's unique learning needs.
 
-Through both the scalpel and the camera lens, I carefully document procedures, highlight surgical techniques, and preserve the intricate details that make each operation unique. My work aims to educate medical professionals, inspire students, and provide a deeper understanding of the skill, dedication, and artistry involved in modern surgical practice.
+We provide one-to-one tutoring, live online classes, group learning sessions, homework support, exam preparation, assignment assistance, concept revision sessions, and past paper practice for students across the globe. Our experienced tutors focus on building strong mathematical foundations, improving problem-solving skills, and boosting confidence in every learner.
 
-Beyond the operating room, I explore the intersection of medicine and visual storytelling, creating a portfolio that reflects both technical expertise and the human experience in healthcare.`;
+Whether you're preparing for school exams, international qualifications, or simply aiming to improve your grades, MathiMastersHub offers a supportive learning environment where students can learn at their own pace and achieve their academic goals.
 
-const defaultTabDescription = `My work merges medicine with visual storytelling. Every photograph and surgical case captures the intricacies of human anatomy, the precision of surgical techniques, and the care behind every procedure. By sharing these experiences, I aim to educate medical professionals, inspire students, and give the public a glimpse into the discipline and artistry of modern surgery.
+Stay connected for educational updates, math tips, exam strategies, student achievements, and exciting learning opportunities from MathiMastersHub.
+`;
 
-From complex procedures to detailed surgical photography, this platform reflects my commitment to excellence, education, and the human side of medicine.`;
+const defaultTabDescription = `At MathiMastersHub, we combine expert teaching with personalized learning strategies to help students master mathematics with confidence. Every lesson is designed to strengthen concepts, improve analytical thinking, and develop effective problem-solving skills.
+
+Our teaching approach focuses on understanding rather than memorization. Through interactive live sessions, guided practice, homework assistance, and exam-focused preparation, we help students overcome challenges and achieve academic success.
+
+By supporting students from different educational systems and countries, we create a global learning environment where mathematics becomes more accessible, enjoyable, and rewarding. This platform reflects our commitment to quality education, continuous improvement, and student success.`;
 
 export default function PortfolioDetailSection({
   sectionTitle,
@@ -98,7 +103,7 @@ export default function PortfolioDetailSection({
                 {description}
               </p>
             </div>
-            <div className="flex flex-wrap gap-2 sm:gap-3">
+            {/* <div className="flex flex-wrap gap-2 sm:gap-3">
               {buttons.map((btn, i) => (
                 <Link
                   key={i}
@@ -113,7 +118,7 @@ export default function PortfolioDetailSection({
             <div className="pt-2">
               <p className="text-sm text-gray-600 mb-2">Stay connected for updates, insights, and medical photography highlights from my surgical journey.</p>
               <LandingSocialIconButtons links={companySocialLinks} className="justify-start" />
-            </div>
+            </div> */}
           </div>
         </div>
 

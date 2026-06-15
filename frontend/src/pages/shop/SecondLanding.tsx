@@ -46,12 +46,12 @@ import {
 } from "@/utils/landingSectionContent";
 import FloatingWhatsApp from "@/components/ui/FloatingWhatsApp";
 import PageLoader from "@/components/ui/PageLoader";
-import { Search, Lightbulb, Settings, Rocket, Package } from "lucide-react";
+import { Search, Lightbulb, Settings, Rocket, Package, UserCheck, ClipboardCheck, Presentation, BookOpen, TrendingUp, GraduationCap } from "lucide-react";
 import { smoothScrollToElement } from "@/lib/utils";
 import { getCompany } from "@/api/company.api";
 import { getContentByType } from "@/api/content.api";
 import type { FAQ } from "@/api/content.api";
-import { applyCompanyBranding, buildWhatsAppUrl, DEFAULT_COMPANY_NAME } from "@/utils/companyBrand";
+import { applyCompanyBranding, buildWhatsAppContactUrl, buildWhatsAppGreetingMessage, DEFAULT_COMPANY_NAME } from "@/utils/companyBrand";
 import { buildFilteredMainNavLinks } from "@/utils/landingNavbarLinks";
 import { DEFAULT_LANDING_SECTION_ORDER } from "@/utils/defaultLandingSectionOrder";
 
@@ -81,12 +81,12 @@ const myProjectsHtmlContent = `
 `;
 
 const howWeWorkItems = [
-  { icon: Search, label: "Label Here", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit." },
-  { icon: Lightbulb, label: "Label Here", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit." },
-  { icon: Settings, label: "Label Here", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit." },
-  { icon: Rocket, label: "Label Here", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit." },
-  { icon: Package, label: "Label Here", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit." },
-  { icon: Package, label: "Label Here", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit." },
+  { icon: UserCheck, label: "Personalized Learning Process", description: "Every student receives a customized learning approach based on their goals, strengths, and areas for improvement." },
+  { icon: ClipboardCheck, label: "Free Assessment & Consultation", description: "We evaluate the student's current level and learning requirements before recommending the best learning path." },
+  { icon: Presentation, label: "Live Interactive Classes", description: "Students participate in engaging online sessions that encourage active learning and real-time problem solving." },
+  { icon: BookOpen, label: "Regular Practice & Homework Support", description: "Assignments, worksheets, and guided practice help reinforce concepts and improve performance." },
+  { icon: TrendingUp, label: "Progress Tracking & Feedback", description: "Parents and students receive regular updates on learning progress, strengths, and improvement areas." },
+  { icon: GraduationCap, label: "Exam Preparation & Success", description: "Focused revision sessions, past paper practice, and exam strategies help students perform with confidence." },
 ];
 
 const MAIN_NAV_SCROLL_IDS = new Set([
@@ -142,7 +142,7 @@ function createSectionRenderers(
           description={desc || undefined}
           buttons={[
             // { label: "View Portfolio", href: "#portfolio", variant: "primary" },
-            { label: "View Application", href: "/#applications", variant: "primary" },
+            { label: "View Courses", href: "/#courses", variant: "primary" },
             { label: "Contact Me", href: "#contact", variant: "secondary" },
           ]}
           showSocialIcons={false}
@@ -172,23 +172,19 @@ function createSectionRenderers(
           "description",
           "Explore the intersection of medicine and visual storytelling through curated surgical documentation and photography."
         )}
-        buttonText={ov("cta-banner-1", "buttonText", "Explore Now")}
-        onButtonClick={() => {
-        const el = document.getElementById("portfolio");
-        if (el) {
-          smoothScrollToElement(el, { duration: 1000 }); // adjust duration if needed
-        }
-      }} />
+          buttonText={ov("cta-banner-1", "buttonText", "Explore Now")}
+          buttonHref={workTogetherWhatsAppHref}
+        />
       </div>
     ),
     "text-image": () => (
       <div id="text-image" className={spacing.section.gap}>
         <TextImageSection
-          title={ov("text-image", "title", "Precision Meets Art in Surgery")}
+          title={ov("text-image", "title", "Personalized Math Learning for Global Success")}
           description={ov(
             "text-image",
             "description",
-            "As a board-certified surgeon and medical photographer, I capture the discipline, skill, and human side of surgery. Each procedure is documented to educate, inspire, and showcase the artistry involved in modern surgical practice."
+            "At MathiMastersHub, we combine expert instruction, interactive learning, and individualized support to help students achieve excellence in mathematics. From strengthening core concepts to preparing for important exams, our programs are designed to make learning effective, engaging, and rewarding for students worldwide."
           )}
           bullets={ov("text-image", "bullets", textImageBulletsDefault)
             .split("\n")
@@ -219,7 +215,7 @@ function createSectionRenderers(
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt."
           )}
           buttonText={ov("cta-banner-2", "buttonText", "View Now")}
-          buttonHref="#"
+          buttonHref={workTogetherWhatsAppHref}
         />
       </div>
     ),
@@ -518,7 +514,7 @@ function createSectionRenderers(
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla facilisi."
           )}
           buttonText={ov("help-banner-2", "buttonText", "Request a Free Quote")}
-          buttonHref="#"
+          buttonHref={workTogetherWhatsAppHref}
         />
       </div>
     ),
@@ -737,7 +733,7 @@ export default function SecondLanding() {
           socialLinks: companyData.socialLinks,
         },
         faqPage,
-        buildWhatsAppUrl(companyData.phone, "Hello, I visited the ZI_Core site. I would like to ask you"),
+        buildWhatsAppContactUrl(companyData.phone, companyData.company || DEFAULT_COMPANY_NAME),
         sectionContentMap
       ),
     [
@@ -812,7 +808,7 @@ export default function SecondLanding() {
         bottomDivHasColor={false}
         otherPagesItems={otherPagesItems}
         companyName={companyData.company || DEFAULT_COMPANY_NAME}
-        hireMeHref={buildWhatsAppUrl(companyData.phone, "Hello, I visited the ZI_Core site. I would like to ask you")}
+        hireMeHref={buildWhatsAppContactUrl(companyData.phone, companyData.company || DEFAULT_COMPANY_NAME)}
         companySocialLinks={companyData.socialLinks}
         landingScrollSpyOrder={landingScrollSpyOrder}
         otherPagesScrollIds={otherPagesScrollIds}
@@ -872,7 +868,7 @@ export default function SecondLanding() {
       </section>
       <FloatingWhatsApp
         phoneNumber={companyData.phone || ""}
-        message="Hello, I visited the ZI_Core site. I would like to ask you"
+        message={buildWhatsAppGreetingMessage(companyData.company || DEFAULT_COMPANY_NAME)}
         label="Chat on WhatsApp"
       />
     </div>

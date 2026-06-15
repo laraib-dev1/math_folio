@@ -9,7 +9,7 @@ import { getBlogById, getPublishedCatalogItems, incrementBlogView } from "@/api/
 import { getApplicationById, getApplications, incrementApplicationView } from "@/api/application.api";
 import { getCompany } from "@/api/company.api";
 import { getCachedData, CACHE_KEYS } from "@/utils/cache";
-import { buildWhatsAppUrl } from "@/utils/companyBrand";
+import { buildWhatsAppContactUrl } from "@/utils/companyBrand";
 import PageLoader from "@/components/ui/PageLoader";
 import ApplicationTileCard from "@/components/applications/ApplicationTileCard";
 import ProductImageGallery from "@/components/products/ProductImageGallery";
@@ -670,10 +670,7 @@ export default function CatalogDetail({ typeOverride, idOverride }: CatalogDetai
                       title="Like what you see?"
                       description="Donec rutrum congue leo eget malesuada. Vivamus suscipit tortor eget felis porttitor volutpat."
                       buttonText="Let's Work Together"
-                      buttonHref={buildWhatsAppUrl(
-                        companyPhone,
-                        "Hello, I visited the ZI_Core site. I would like to ask you"
-                      )}
+                      buttonHref={buildWhatsAppContactUrl(companyPhone, landingNav.companyName)}
                     />
                   </section>
                 )}

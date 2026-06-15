@@ -68,6 +68,8 @@ const CatalogDetail = React.lazy(() => import("@/pages/shop/CatalogDetail"));
 const BlogCatalogDetail = React.lazy(() => import("@/pages/shop/BlogCatalogDetail"));
 const ApplicationsListPage = React.lazy(() => import("@/pages/shop/ApplicationsListPage"));
 const GetStartedPage = React.lazy(() => import("@/pages/shop/GetStartedPage"));
+const PrivacyPolicy = React.lazy(() => import("@/pages/shop/PrivacyPolicy"));
+const TermsConditions = React.lazy(() => import("@/pages/shop/TermsConditions"));
 
 export default function App() {
   useEffect(() => {
@@ -111,6 +113,8 @@ export default function App() {
         <Route path="/get-started" element={<Navigate to="/zi-core-package" replace />} />
         <Route path="/login" element={<Login />} />
         <Route path="/access" element={<Access />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+        <Route path="/terms-conditions" element={<TermsConditions />} />
         <Route path="*" element={<SecondLanding />} />
 
         {/* ---------- COMMENTED OUT: SHOP ROUTES ---------- */}

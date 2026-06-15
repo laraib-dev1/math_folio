@@ -15,9 +15,11 @@ export type Navbar2NavLinkItem = {
 const NAV_TEMPLATE: (Navbar2NavLinkItem & { sectionId: string })[] = [
   { to: "#home", label: "Home", hash: "home", sectionId: "hero" },
   { to: "#applications", label: "Applications", hash: "applications", sectionId: "applications" },
-  { to: "#about", label: "About me", hash: "about", sectionId: "about" },
+  { to: "#about", label: "About", hash: "about", sectionId: "about" },
+  { to: "#testimonials", label: "Courses", hash: "courses", sectionId: "courses" },
   { to: "#portfolio", label: "Portfolio", hash: "portfolio", sectionId: "portfolio" },
   { to: "#testimonials", label: "Testimonials", hash: "testimonials", sectionId: "testimonials" },
+  
   {
     to: "#other-pages",
     label: "Other Pages",

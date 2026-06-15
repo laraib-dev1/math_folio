@@ -40,13 +40,31 @@ export default function HelpBanner({
             <p className="text-sm sm:text-base text-gray-600 max-w-xl mx-auto mb-6">
               {description}
             </p>
-            <Link
-              to={buttonHref}
-              className="inline-block px-8 py-3 rounded-full font-medium text-white text-sm sm:text-base hover:opacity-90 transition-opacity"
-              style={{ backgroundColor: "var(--theme-primary, #8B5E3C)" }}
-            >
-              {buttonText}
-            </Link>
+            {(() => {
+              const href = buttonHref || "#";
+              const isExternal = /^https?:\/\//i.test(href);
+              const className =
+                "inline-block px-8 py-3 rounded-full font-medium text-white text-sm sm:text-base hover:opacity-90 transition-opacity";
+              const style = { backgroundColor: "var(--theme-primary, #8B5E3C)" };
+              if (isExternal) {
+                return (
+                  <a
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={className}
+                    style={style}
+                  >
+                    {buttonText}
+                  </a>
+                );
+              }
+              return (
+                <Link to={href} className={className} style={style}>
+                  {buttonText}
+                </Link>
+              );
+            })()}
           </div>
         </div>
       </section>

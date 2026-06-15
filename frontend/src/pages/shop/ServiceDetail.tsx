@@ -151,7 +151,10 @@ export default function ServiceDetail() {
             htmlContent={service.description || defaultServiceHtml}
             relatedServices={relatedServices.length > 0 ? relatedServices : undefined}
             stickySidebar={true}
-            bookMeetingHref={landingNav.hireMeHref}
+            bookMeetingHref={landingNav.buildWhatsAppHref({
+              itemTitle: service.title || "Untitled Service",
+              itemKind: "service",
+            })}
             bookMeetingLabel="Set Meeting"
           />
         </div>

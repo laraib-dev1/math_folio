@@ -2,7 +2,11 @@ import { useEffect, useState } from "react";
 import { getCompany } from "@/api/company.api";
 import { getEnabledLandingSections, getLandingSections } from "@/api/landingsection.api";
 import { getCachedData, CACHE_KEYS } from "@/utils/cache";
-import { buildWhatsAppUrl, DEFAULT_COMPANY_NAME } from "@/utils/companyBrand";
+import {
+  buildWhatsAppContactUrl,
+  DEFAULT_COMPANY_NAME,
+  type WhatsAppContactContext,
+} from "@/utils/companyBrand";
 import {
   buildFilteredMainNavLinks,
   type Navbar2NavLinkItem,
@@ -23,6 +27,7 @@ const MAIN_NAV_SCROLL_IDS = new Set([
 export type SecondLandingNavbarProps = {
   companyName: string;
   hireMeHref: string;
+  buildWhatsAppHref: (context?: WhatsAppContactContext) => string;
   companySocialLinks: Record<string, string | undefined>;
   otherPagesItems: { id: string; label: string }[];
   /** Filtered main nav (empty until first SpFolio load completes). */
@@ -108,9 +113,13 @@ export function useSecondLandingNavbarProps(): SecondLandingNavbarProps {
     };
   }, []);
 
+  const buildWhatsAppHref = (context?: WhatsAppContactContext) =>
+    buildWhatsAppContactUrl(phone, companyName, context);
+
   return {
     companyName,
-    hireMeHref: buildWhatsAppUrl(phone, "Hello, I visited the ZI_Core site. I would like to ask you"),
+    hireMeHref: buildWhatsAppHref(),
+    buildWhatsAppHref,
     companySocialLinks: socialLinks,
     otherPagesItems,
     mainNavLinks,

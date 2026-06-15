@@ -7,7 +7,7 @@ import { getProducts } from "@/api/product.api";
 import { getCachedData, setCachedData, CACHE_KEYS } from "@/utils/cache";
 import LandingSocialIconButtons from "@/components/landing/LandingSocialIconButtons";
 import { spacing } from "@/utils/spacing";
-import { buildWhatsAppUrl } from "@/utils/companyBrand";
+import { buildWhatsAppContactUrl } from "@/utils/companyBrand";
 
 type FooterVariant = "default" | "landing2";
 
@@ -597,10 +597,7 @@ export default function Footer({ variant = "default" }: { variant?: FooterVarian
               `© ${new Date().getFullYear()} ${companyData.company || "VERES"}. All rights reserved.`}
           </span>
           <a
-            href={buildWhatsAppUrl(
-              companyData.phone,
-              "Hello, I visited the ZI_Core site. I would like to ask you"
-            )}
+            href={buildWhatsAppContactUrl(companyData.phone, companyData.company)}
             target="_blank"
             rel="noopener noreferrer"
             className="text-gray-100 hover:opacity-90 cursor-pointer underline-offset-2 hover:underline"

@@ -10,7 +10,7 @@ import { getCompany } from "@/api/company.api";
 import { getMe } from "@/api/auth.api";
 import { getCachedData, setCachedData, CACHE_KEYS } from "@/utils/cache";
 import * as LucideIcons from "lucide-react";
-import { buildWhatsAppUrl, resolveCompanyAssetUrl } from "@/utils/companyBrand";
+import { buildWhatsAppContactUrl, resolveCompanyAssetUrl } from "@/utils/companyBrand";
 
 export default function Navbar() {
   const navigate = useNavigate();
@@ -114,7 +114,7 @@ export default function Navbar() {
   return `${base} ${color}`;
 };
 
-  const hireMeHref = buildWhatsAppUrl(company.phone, "Hello, I visited the ZI_Core site. I would like to ask you");
+  const hireMeHref = buildWhatsAppContactUrl(company.phone, company.company);
 
   return (
     <header className="bg-white  text-black  shadow-sm fixed top-0 w-full z-50">

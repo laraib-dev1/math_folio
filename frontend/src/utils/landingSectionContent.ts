@@ -147,7 +147,7 @@ export const SECTION_CONTENT_DEFAULTS: Record<string, Record<string, string>> = 
     title: "Precision Meets Art in Surgery",
     description:
       "As a board-certified surgeon and medical photographer, I capture the discipline, skill, and human side of surgery. Each procedure is documented to educate, inspire, and showcase the artistry involved in modern surgical practice.",
-    bullets: "Board-Certified General Surgeon\nPassionate Photographer\nBridges Surgery and Storytellingt",
+    bullets: "Experienced Math Educators\nStudent-Centered Learning\nTurning Practice into Achievement",
   },
   "how-we-work": {
     title: "How We Work",
